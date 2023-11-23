@@ -15,14 +15,14 @@ require '../config/conexion.php';
     echo '
 				<script language="javascript">
 					alert("Registro creado correctamente");
-					window.location.replace("http://localhost/inccav/views/formcatedratico.php");
+					window.location.replace("https://colegioinccav.online/views/formcatedratico.php");
 				</script>
 			';
     } else {
     echo '
 				<script language="javascript">
 					alert("Error al  crear el registro");
-					window.location.replace("http://localhost/inccav/views/formcatedratico.php");
+					window.location.replace("https://colegioinccav.online/views/formcatedratico.php");
 				</script>
 			';
     }
