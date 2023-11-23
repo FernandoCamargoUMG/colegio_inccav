@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" name="user">
             </div>
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Ingrese la contrase(*)</label>
+                <label style="background-color: #6d0d0d; color: white" class="form-label">Ingrese la contraseña(*)</label>
                 <input type="password" class="form-control" name="clave">
             </div>
             <label style="background-color: #6d0d0d; color: white" class="form-label">Seleccione el rol de usuario</label>
