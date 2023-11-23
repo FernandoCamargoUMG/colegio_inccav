@@ -14,14 +14,14 @@ require '../config/conexion.php';
     echo '
 				<script language="javascript">
 					alert("Registro creado correctamente");
-					window.location.replace("http://localhost/inccav/menu_principal.php");
+					window.location.replace("https://colegioinccav.online/menu_principal.php");
 				</script>
 			';
     } else {
     echo '
 				<script language="javascript">
 					alert("Error al  crear el registro");
-					window.location.replace("http://localhost/inccav/menu_principal.php");
+					window.location.replace("https://colegioinccav.online/menu_principal.php");
 				</script>
 			';
     }
