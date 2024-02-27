@@ -1,9 +1,9 @@
 <?php
    
-   $servername = "142.93.12.121:3306";
+   $servername = "localhost";
     $database = "colegio_inccav";
-    $username = "marex";
-    $password = "Manager00";
+    $username = "root";
+    $password = "admin";
 
     $conn = new mysqli($servername, $username, $password, $database);
     if (!$conn) {

@@ -11,7 +11,7 @@
 
 <body style="background-color: #6d0d0d">
     <div class="container">
-        <h1 class="text-center" style="background-color: #333; color: white">Edicion de alumnos</h1>
+        <h1 class="text-center" style="background-color: #333; color: white">Edición de alumnos</h1>
         <form action="../controladores/editAlu.php" method="POST">
             <?php
             include '../config/conexion.php';
