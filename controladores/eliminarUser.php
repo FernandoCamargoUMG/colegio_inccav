@@ -10,14 +10,14 @@ if ($query == 1) {
     echo '
 				<script language="javascript">
 					alert("Registro eliminado correctamente");
-					window.location.replace("https://colegioinccav.online/menu_principal.php");
+					window.location.replace("../menu_principal.php");
 				</script>
 			';
     } else {
     echo '
 				<script language="javascript">
 					alert("Error al eliminar registro");
-					window.location.replace("https://colegioinccav.online/menu_principal.php");
+					window.location.replace("../menu_principal.php");
 				</script>
 			';
     }

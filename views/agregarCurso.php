@@ -1,12 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Agregar Curso</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body style="background-color: #6d0d0d">
@@ -15,29 +17,52 @@
     <div class="container">
         <form action="../controladores/insertarCurso.php" method="POST">
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Nombre del curso(*)</label>
-                <input type="text" class="form-control" name="nombreCurso">
+                <label class="form-label text-white">Nombre del curso(*)</label>
+                <input type="text" class="form-control" name="nombreCurso" required>
             </div>
-            <label style="background-color: #6d0d0d; color: white" class="form-label">Catedratico que lo imparte(*)</label>
-            <select class="form-select mb-3" name="idCat">
-                <option selected disabled>---seleccionar catedratico---</option>
-                <?php
-                include '../config/conexion.php';
-                $sql = $conn->query("SELECT * FROM colegio_inccav.catedratico;");
-                while ($resultado = $sql->fetch_assoc()) {
-                    echo "<option value='" . $resultado['id_cat'] . "'>" . $resultado['nombre'] . " " . $resultado['apellido'] . "</option>";
-                }
-                ?>
-            </select> 
-            <div class="text-center">
-            <button type="submit" class="btn btn-danger">Registrar</button>
-           <a href="formcurso.php" class="btn btn-dark">Volver Atras</a>
+
+            <label class="form-label text-white">Catedrático que lo imparte(*)</label>
+            <input type="text" class="form-control" id="catedratico" required>
+            <input type="hidden" name="idCat" id="idCat">
+
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-danger">Registrar</button>
+                <a href="formcurso.php" class="btn btn-dark">Volver Atrás</a>
             </div>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#catedratico").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "../controladores/busca_catedratico.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            termino: request.term
+                        },
+                        success: function(data) {
+                            response($.map(data, function(item) {
+                                return {
+                                    label: item.nombre + " " + item.apellido,
+                                    value: item.nombre + " " + item.apellido,
+                                    id: item.id_cat
+                                };
+                            }));
+                        }
+                    });
+                },
+                minLength: 1,
+                select: function(event, ui) {
+                    $("#idCat").val(ui.item.id);
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">ID</th>
+					<!-- <th scope="col">ID</th> -->
 					<th scope="col">Nombre</th>
 					<th scope="col">Apellido</th>
 					<th scope="col">Especialidad</th>
@@ -36,9 +36,9 @@
 				while ($result = $query->fetch_assoc()) {
 					?>
 					<tr>
-						<th scope="row">
-							<?php echo $result['id_cat'] ?>
-						</th>
+						<!-- <th scope="row">
+							<?php //echo $result['id_cat'] ?>
+						</th> -->
 						<th scope="row">
 							<?php echo $result['nombre'] ?>
 						</th>

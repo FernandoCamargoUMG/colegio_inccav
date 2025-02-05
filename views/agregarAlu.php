@@ -1,12 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Agregar Alumno</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body style="background-color: #6d0d0d">
@@ -15,42 +17,50 @@
     <div class="container">
         <form action="../controladores/insertarAlu.php" method="POST">
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Ingrese el Carnet(*)</label>
+                <label class="form-label text-white">Ingrese el Carnet(*)</label>
                 <input type="text" class="form-control" name="carnet">
             </div>
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Ingrese el Nombre(*)</label>
+                <label class="form-label text-white">Ingrese el Nombre(*)</label>
                 <input type="text" class="form-control" name="nombre">
             </div>
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Ingrese el Apellido(*)</label>
+                <label class="form-label text-white">Ingrese el Apellido(*)</label>
                 <input type="text" class="form-control" name="apellido">
             </div>
             <div class="mb-3">
-                <label style="background-color: #6d0d0d; color: white" class="form-label">Observaciones(*)</label>
+                <label class="form-label text-white">Observaciones(*)</label>
                 <input type="text" class="form-control" name="descripcion">
             </div>
-            <label style="background-color: #6d0d0d; color: white" class="form-label">Estado del estudiante(*)</label>
-            <br>
-            <select class="form-select mb-3" name="estado">
-                <option selected disabled>---seleccionar estado---</option>
-                <?php
-                include '../config/conexion.php';
-                $sql = $conn->query("SELECT * FROM colegio_inccav.estado_alu;");
-                while ($resultado = $sql->fetch_assoc()) {
-                    echo "<option value='" . $resultado['id_estAlu'] . "'>" . $resultado['estado'] . "</option>";
-                }
-                ?>
-            </select>
+            <div class="mb-3">
+                <label class="form-label text-white">Estado del estudiante(*)</label>
+                <input type="text" class="form-control" id="estado" name="estado">
+            </div>
             <div class="text-center">
-            <button type="submit" class="btn btn-danger">Registrar</button>
-           <a href="formalumno.php" class="btn btn-dark">Volver Atras</a>
+                <button type="submit" class="btn btn-danger">Registrar</button>
+                <a href="formalumno.php" class="btn btn-dark">Volver Atrás</a>
             </div>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#estado").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "../controladores/busca_estados.php",
+                        type: "POST",
+                        dataType: "json",
+                        data: { termino: request.term },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 1
+            });
+        });
+    </script>
 </body>
 
 </html>
