@@ -3,19 +3,20 @@ require '../config/conexion.php';
 
 $termino = $_POST['termino'];
 
-$sql = $conn->prepare("SELECT estado FROM colegio_inccav.estado_alu WHERE estado LIKE ?");
-$likeTermino = "%" . $termino . "%";
-$sql->bind_param("s", $likeTermino);
+$sql = $conn->prepare("SELECT id_estAlu, estado FROM estado_alu WHERE estado LIKE ?");
+$likeTerm = "%$termino%";
+$sql->bind_param("s", $likeTerm);
 $sql->execute();
-$resultado = $sql->get_result();
+$result = $sql->get_result();
 
 $estados = [];
-while ($fila = $resultado->fetch_assoc()) {
-    $estados[] = $fila['estado'];
+
+while ($row = $result->fetch_assoc()) {
+    $estados[] = [
+        "label" => $row['estado'],
+        "id" => $row['id_estAlu']
+    ];
 }
 
 echo json_encode($estados);
-
-$sql->close();
-$conn->close();
 ?>

@@ -34,8 +34,10 @@
             </div>
             <div class="mb-3">
                 <label class="form-label text-white">Estado del estudiante(*)</label>
-                <input type="text" class="form-control" id="estado" name="estado">
+                <input type="text" class="form-control" id="estado_texto">
+                <input type="hidden" name="estado" id="estado">
             </div>
+
             <div class="text-center">
                 <button type="submit" class="btn btn-danger">Registrar</button>
                 <a href="formalumno.php" class="btn btn-dark">Volver Atrás</a>
@@ -44,20 +46,31 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $("#estado").autocomplete({
-                source: function (request, response) {
+        $(document).ready(function() {
+            $("#estado_texto").autocomplete({
+                source: function(request, response) {
                     $.ajax({
                         url: "../controladores/busca_estados.php",
                         type: "POST",
                         dataType: "json",
-                        data: { termino: request.term },
-                        success: function (data) {
-                            response(data);
+                        data: {
+                            termino: request.term
+                        },
+                        success: function(data) {
+                            response($.map(data, function(item) {
+                                return {
+                                    label: item.label, // lo que el usuario ve
+                                    value: item.label,
+                                    id: item.id // el id que se usará internamente
+                                };
+                            }));
                         }
                     });
                 },
-                minLength: 1
+                minLength: 1,
+                select: function(event, ui) {
+                    $("#estado").val(ui.item.id); // guarda el id en el campo oculto
+                }
             });
         });
     </script>
