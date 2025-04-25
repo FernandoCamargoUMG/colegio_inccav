@@ -53,12 +53,15 @@ $conn->close();
             html: "<?php echo $resultado ? '<strong>Registro agregado correctamente!</strong><br> Desea volver al formulario?'
                         : '<strong>Error al:</strong>' . $conn->error . '<br> Desea volver al formulario?'; ?>",
             icon: "<?php echo $resultado ? 'success' : 'error'; ?>",
-            confirmButtonText: "Aceptar",
+            confirmButtonText: "Desea ir al listado?",
+            denyButtonText: "Desea agregar otro registro?",
+            showDenyButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location = "../views/formcurso.php";
             } else {
-                window.history.back();
+                //window.history.back();
+                window.location = "../views/agregarCurso.php"
             }
         })
     </script>

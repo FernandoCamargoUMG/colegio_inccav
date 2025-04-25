@@ -18,34 +18,30 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">Codigo del curso</th>
+					<!-- <th scope="col">Codigo del curso</th> -->
 					<th scope="col">Curso</th>
 					<th  scope="col">Catedratico</th>
-					<th scope="col"></th>
 					<th scope="col">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
 				require '../config/conexion.php';
-				$query = $conn->query("SELECT * FROM curso
-				INNER JOIN catedratico ON  curso.id_cat = catedratico.id_cat
+				$query = $conn->query("SELECT * FROM curso c
+				INNER JOIN catedratico ca ON c.id_cat = ca.id_cat
 				/*INNER JOIN grado ON  alumno.idGrado = grado.id*/
 				");
 				while ($result = $query->fetch_assoc()) {
 					?>
 					<tr>
-						<th scope="row">
-							<?php echo $result['id_curso'] ?>
-						</th>
+						<!-- <th scope="row">
+							<?php //echo $result['id_curso'] ?>
+						</th> -->
 						<th scope="row">
 							<?php echo $result['descripcion'] ?>
 						</th>
 						<th scope="row">
-							<?php echo $result['nombre'] ?>
-						</th>
-						<th  scope="row">
-							<?php echo $result['apellido'] ?>
+							<?php echo $result['nombre'] .' '. $result['apellido']  ?>
 						</th>
 						
 						<th>

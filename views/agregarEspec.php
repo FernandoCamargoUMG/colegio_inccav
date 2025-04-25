@@ -14,10 +14,10 @@
     <br>
     <div class="container">
         <form action="../controladores/insertarEspec.php" method="POST">
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label style="background-color: #6d0d0d; color: white" class="form-label">ID(*)</label>
                 <input type="text" class="form-control" name="IdEspec">
-            </div>
+            </div> -->
             <div class="mb-3">
                 <label style="background-color: #6d0d0d; color: white" class="form-label">Descripción(*)</label>
                 <input type="text" class="form-control" name="desc">
